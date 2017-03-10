@@ -16,7 +16,7 @@ var req = https.request(options, function(res) {
 
     res.setEncoding("UTF-8");
 
-    res.once("date", function(chunk) {
+    res.once("data", function(chunk) {
         console.log(chunk);
     });
 
@@ -39,4 +39,4 @@ req.on("error", function(err) {
     console.log(`problem with request: ${err.message}`);
 });
 
-req.end;
+req.end();
