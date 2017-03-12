@@ -1,23 +1,27 @@
 {
-  "name": "nodetest",
-  "version": "1.0.0",
-  "description": "nodetest",
-  "main": "index.js",
-  "scripts": {
-    "test": "node index"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/deephsit/nodetest.git"
-  },
-  "keywords": [
-    "node",
-    "test"
-  ],
-  "author": "Ray",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/deephsit/nodetest/issues"
-  },
-  "homepage": "https://github.com/deephsit/nodetest#readme"
+    "name": "nodetest",
+    "version": "1.0.0",
+    "description": "nodetest",
+    "dependencies": {
+        "socket.io": "~0.9.6",
+        "mime": "~1.2.7"
+    },
+    "main": "index.js",
+    "scripts": {
+        "test": "node index"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/deephsit/nodetest.git"
+    },
+    "keywords": [
+        "node",
+        "test"
+    ],
+    "author": "Ray",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/deephsit/nodetest/issues"
+    },
+    "homepage": "https://github.com/deephsit/nodetest#readme"
 }
