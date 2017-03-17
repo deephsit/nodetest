@@ -27,10 +27,12 @@ function serveStatic(response, cache, absPath) { //静态文件服务
                     if (err) {
                         send404(response); //都没有就返回404错误
                     } else {
-                        cache(absPath) = data;
+                        cache[absPath] = data;
                         sendFile(response, absPath, data);
                     }
                 });
+            } else {
+                send404(response);
             }
         });
     }
@@ -43,7 +45,7 @@ var server = http.createServer(function(request, response) { //创建http服务�
     if (request.url == '/') {
         filePath = 'public/index.html'; //确定返回的默认html文件
     } else {
-        filePath = 'public' + request.url; //将url转化为文件的相对路径
+        filePath = 'public/' + request.url; //将url转化为文件的相对路径
     }
     var absPath = './' + filePath;
     serveStatic(response, cache, absPath); //返回静态文件
@@ -52,3 +54,6 @@ var server = http.createServer(function(request, response) { //创建http服务�
 server.listen(3000, function() {
     console.log("Server listening on port 3000.");
 });
+
+var chatServer = require('./lib/chat_server'); //加载处理聊天功能的定制模块
+chatServer.listen(server); //启动socket.io服务器
