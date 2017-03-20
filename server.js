@@ -5,9 +5,29 @@ var mime = require('mime'); //根据文件扩展名推出mime类型
 var cache = {}; //缓存文件内容的对象
 
 function send404(response) { //发送404错误
-    response.writeHead(404, { 'Content-Type': 'text/plain' });
-    response.write('Error 404: resource not found.');
-    response.end();
+    absPath = './public/404.html';
+    if (cache[absPath]) { //检查文件是否在内存中
+        sendFile(response, absPath, cache[absPath]); //从内存中返回文件
+    } else {
+        fs.exists(absPath, function(exists) {
+            if (exists) {
+                fs.readFile(absPath, function(err, data) {
+                    if (err) {
+                        response.writeHead(404, { "Content-Type": "text/plain" });
+                        response.write("404文件都出错啦，世界末日啦");
+                        response.end();
+                    } else {
+                        cache[absPath] = data;
+                        sendFile(response, absPath, data);
+                    }
+                });
+            } else {
+                response.writeHead(404, { "Content-Type": "text/plain" });
+                response.write("404文件都不见啦，世界末日啦");
+                response.end();
+            }
+        });
+    }
 }
 
 function sendFile(response, filePath, fileContents) { //文件数据服务函数,发送文件的内容
